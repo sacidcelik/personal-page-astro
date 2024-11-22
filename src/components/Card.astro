@@ -6,6 +6,9 @@ interface Props {
   colSpan?: string;
   href?: string;
   order: string;
+  noPadding?: boolean;
+  bgColor?: string;
+  maxHeight?: string;
 }
 
 interface AnimationDelay {
@@ -18,7 +21,15 @@ interface AnimationDelay {
   "7": "delay-7";
 }
 
-const { href, rowSpan, colSpan, order } = Astro.props;
+const {
+  href,
+  rowSpan,
+  colSpan,
+  order,
+  bgColor,
+  maxHeight,
+  noPadding = false,
+} = Astro.props;
 
 const animationDelay: AnimationDelay = {
   "1": "delay-1",
@@ -30,7 +41,7 @@ const animationDelay: AnimationDelay = {
   "7": "delay-7",
 };
 
-const cssString = `card opacity-0 border-t-2 border-l-2 border-r-4 border-b-4 border-sky-900 dark:border-sky-200 animate-appear fill-mode-forwards ${animationDelay[order as keyof AnimationDelay]} h-max sm:h-auto group/card overflow-hidden shadow-lg rounded-lg p-6 ${href && "hover:border-orange-400 hover:dark:border-orange-700"} align-start flex-none h-max justify-start relative  w-full col-span-=1 ${colSpan || "md:col-span-2"} ${rowSpan || "row-span-2"}`;
+const cssString = `card opacity-0 border-t-2 border-l-2 border-r-4 border-b-4 border-sky-900 ${bgColor} dark:border-sky-200 animate-appear fill-mode-forwards ${animationDelay[order as keyof AnimationDelay]} h-max sm:h-auto group/card overflow-hidden shadow-lg rounded-lg ${!noPadding && "p-5"} ${href && "hover:border-orange-400 hover:dark:border-orange-700"} align-start flex-none h-max justify-start relative ${maxHeight} w-full col-span-=1 ${colSpan || "md:col-span-2"} ${rowSpan || "row-span-2"}`;
 ---
 
 {

@@ -6,6 +6,7 @@ import Contact from "../components/Contact.astro";
 import Now from "../components/Now.astro";
 import Imprint from "../components/Imprint.astro";
 import Made from "../components/Made.astro";
+import Avatar from "../components/Avatar.astro";
 ---
 
 <Layout title="sacid celik | software engineer">
@@ -15,9 +16,10 @@ import Made from "../components/Made.astro";
     class="m-auto p-3 grid gap-2 max-w-screen-lg overflow-hidden relative w-full sm:p-4 md:grid-cols-2 md:gap-3 md:p-6 lg:h-screen lg:grid-rows-8 lg:grid-cols-4 lg:gap-4 lg:max-h-[800px]"
   >
     <Welcome />
+    <Avatar />
     <About />
-    <Contact />
     <Now />
+    <Contact />
     <Made />
     <Imprint />
   </main>

@@ -9,11 +9,12 @@ interface Props {
 const { title } = Astro.props;
 
 const isOnRoot = Astro.url.pathname === "/";
+const isOnLegal = Astro.url.pathname === "/legal";
 
 const description =
-  "Sacid Celik, a software developer from Munich, Germany. My favorite tools include JavaScript, Angular, Astro and Node";
+  "sacid celik, a software developer from munich, de. my favorite tools include javascript, angular, astro and nodejs";
 
-const image = `${Astro.url.origin}/laptop.webp`;
+const image = `${Astro.url.origin}/portrait.webp`;
 
 const schema = {
   "@context": "http://schema.org",
@@ -24,7 +25,7 @@ const schema = {
     "https://www.linkedin.com/in/sacid-celik",
     "https://github.com/sacidcelik",
   ],
-  image: "https://sacidcelik.de/laptop.webp",
+  image: "https://sacidcelik.de/portrait.webp",
   jobTitle: "Freelance Software Developer",
   worksFor: {
     "@type": "Organization",
@@ -66,6 +67,7 @@ const schema = {
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url.origin} />
     <meta property="og:image" content={image} />
+    {isOnLegal && <meta name="robots" content="noindex, nofollow" />}
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     <title>{title}</title>
   </head>
