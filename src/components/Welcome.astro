@@ -1,0 +1,65 @@
+---
+import Button from "./Button.astro";
+import Card from "./Card.astro";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import laptop from "../assets/laptop.webp";
+
+const links = {
+  linkedIn: "http://www.linkedin.com/in/sacid-celik",
+  github: "https://github.com/sacidcelik",
+  mail: "mailto:mail@sacidcelik.de",
+};
+---
+
+<Card colSpan="md:col-span-3" rowSpan="md:row-span-4" order="1">
+  <div class="flex h-full">
+    <div class="flex flex-col justify-between md:max-h-[300px] gap-4">
+      <div class="flex flex-col h-full">
+        <h2 class="text-lg font-thin">welcome</h2>
+        <p class="text-lg">
+          hello and welcome! i’m <b>sacid celik</b>, a software developer with a
+          passion for crafting high-performance, delightful user experiences.
+          i’m excited to share my work and connect with you!
+        </p>
+      </div>
+      <div class="flex gap-4">
+        <a href={links.mail} aria-label="send an email" target="_blank">
+          <Button label="send e-mail button">
+            <Icon
+              class="group-hover/button:scale-125 group-hover/button:text-orange-400 group-hover/button:dark:text-orange-700"
+              name="line-md--email"
+            /></Button
+          >
+          <span class="sr-only">Send an email</span>
+        </a>
+        <a href={links.github} aria-label="github profile" target="_blank">
+          <Button>
+            <Icon
+              class="group-hover/button:scale-125 group-hover/button:text-orange-400 group-hover/button:dark:text-orange-700"
+              name="line-md--github"
+            />
+          </Button>
+          <span class="sr-only">GitHub Profile</span>
+        </a>
+        <a href={links.linkedIn} aria-label="linkedIn profile" target="_blank"
+          ><Button>
+            <Icon
+              class="group-hover/button:scale-125 group-hover/button:text-orange-400 group-hover/button:dark:text-orange-700"
+              name="line-md--linkedin"
+            /></Button
+          >
+          <span class="sr-only">LinkedIn Profile</span></a
+        >
+      </div>
+    </div>
+    <Image
+      class="w-auto max-h-[300px] select-none absolute right-[-110px] bottom-[-20px] z-[-1] opacity-20 md:opacity-100 md:relative md:right-auto md:bottom-auto md:z-auto pointer-events-none"
+      alt="sacid's memoji"
+      width="300"
+      height="300"
+      src={laptop}
+      alt="Avatar with laptop"
+    />
+  </div>
+</Card>

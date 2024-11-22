@@ -1,50 +1,85 @@
 ---
+import ThemeToggle from "../components/ThemeToggle.astro";
+import { Icon } from "astro-icon/components";
+
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
+
+const isOnRoot = Astro.url.pathname === "/";
+
+const description =
+  "Sacid Celik, a software developer from Munich, Germany. My favorite tools include JavaScript, Angular, Astro and Node";
+
+const image = `${Astro.url.origin}/laptop.webp`;
+
+const schema = {
+  "@context": "http://schema.org",
+  "@type": "Person",
+  name: "Sacid Celik",
+  url: "https://sacidcelik.de",
+  sameAs: [
+    "https://www.linkedin.com/in/sacid-celik",
+    "https://github.com/sacidcelik",
+  ],
+  image: "https://sacidcelik.de/laptop.webp",
+  jobTitle: "Freelance Software Developer",
+  worksFor: {
+    "@type": "Organization",
+    name: "Self-Employed",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Germany",
+      addressCountry: "DE",
+    },
+  },
+  nationality: {
+    "@type": "Country",
+    name: "Germany",
+  },
+};
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <script>
+      if (localStorage.theme === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" /><link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-touch-icon.png"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.origin} />
+    <meta property="og:image" content={image} />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <title>{title}</title>
+  </head>
+  <body
+    class={`bg-slate-100 dark:bg-slate-900 text-sky-900 dark:text-sky-100 transition-colors duration-1000 m-auto max-w-screen-lg ${isOnRoot && "md:h-screen"} ${isOnRoot && "flex flex-col justify-center"} items-center`}
+  >
+    <header class="w-full relative md:h-10 flex justify-between p-6">
+      <div class={`${!isOnRoot && "hidden"}`}></div>
+      <a href="/" class={`${isOnRoot && "hidden"} flex`}>
+        <Icon name="line-md--arrow-left" class="text-2xl" />
+        <span>Home</span>
+      </a>
+      <ThemeToggle />
+    </header>
+    <slot />
+  </body>
 </html>
-<style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-</style>

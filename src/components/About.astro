@@ -1,0 +1,38 @@
+---
+import Card from "./Card.astro";
+import Pill from "./Pill.astro";
+
+const skills = [
+  "TypeScript",
+  "Angular",
+  "React",
+  "Astro",
+  "Node",
+  "Sass",
+  "Docker",
+];
+---
+
+<Card colSpan="md:col-span-1" rowSpan="md:row-span-5 lg:row-span-7" order="2">
+  <div class="flex flex-col h-full justify-between">
+    <div>
+      <h2 class="text-lg font-thin">about</h2>
+      <span>
+        i'm a software developer from germany and i love to build stuff. my
+        career began in marketing but my natural curiosity and love for
+        problem-solving led me to dive into the exciting realm of web
+        development.
+      </span>
+    </div>
+    <div>
+      <p>
+        i am eager to develop my skills and learn new things. i also like to
+        choose my tools based on the requirements of the project i am working
+        on. however, my usual tools (so far) include:
+      </p>
+      <div class="flex mt-6 gap-2 w-full flex-wrap">
+        {skills.map((skill) => <Pill>{skill.toLowerCase()}</Pill>)}
+      </div>
+    </div>
+  </div>
+</Card>
