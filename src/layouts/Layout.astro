@@ -67,7 +67,7 @@ const schema = {
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url.origin} />
     <meta property="og:image" content={image} />
-    {isOnLegal && <meta name="robots" content="noindex, nofollow" />}
+    {isOnLegal ? <meta name="robots" content="noindex, nofollow" /> : ''}
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     <title>{title}</title>
   </head>
