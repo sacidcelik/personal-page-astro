@@ -8,6 +8,9 @@ const links = {
   github: "https://github.com/sacidcelik",
   mail: "mailto:reach@sacidcelik.de",
 };
+
+const buttonCss =
+  "group-hover/button:scale-125 group-hover/button:text-orange-400 group-hover/button:dark:text-orange-700";
 ---
 
 <Card colSpan="md:col-span-2" rowSpan="md:row-span-4" order="1">
@@ -24,19 +27,13 @@ const links = {
       <div class="flex gap-4">
         <a href={links.github} aria-label="github profile" target="_blank">
           <Button label="open github profile">
-            <Icon
-              class="group-hover/button:scale-125 group-hover/button:text-orange-400 group-hover/button:dark:text-orange-700"
-              name="line-md--github"
-            />
+            <Icon class={buttonCss} name="line-md--github" />
           </Button>
           <span class="sr-only">GitHub Profile</span>
         </a>
         <a href={links.linkedIn} aria-label="linkedIn profile" target="_blank"
           ><Button label="open linkedin profile">
-            <Icon
-              class="group-hover/button:scale-125 group-hover/button:text-orange-400 group-hover/button:dark:text-orange-700"
-              name="line-md--linkedin"
-            /></Button
+            <Icon class={buttonCss} name="line-md--linkedin" /></Button
           >
           <span class="sr-only">LinkedIn Profile</span></a
         >

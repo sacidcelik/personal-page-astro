@@ -72,7 +72,7 @@ const schema = {
     <title>{title}</title>
   </head>
   <body
-    class={`bg-slate-100 dark:bg-slate-900 text-sky-900 dark:text-sky-100 transition-colors duration-1000 m-auto max-w-screen-lg ${isOnRoot && "md:h-screen"} ${isOnRoot && "flex flex-col justify-center"} items-center`}
+    class={`bg-slate-100 dark:bg-slate-900 text-sky-900 dark:text-sky-100 motion-safe:transition-colors motion-safe:duration-1000 m-auto max-w-screen-lg ${isOnRoot && "md:h-screen"} ${isOnRoot && "flex flex-col justify-center"} items-center`}
   >
     <header class="w-full relative md:h-10 flex justify-between p-6">
       <div class={`${!isOnRoot && "hidden"}`}></div>
