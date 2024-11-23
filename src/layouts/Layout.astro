@@ -14,8 +14,6 @@ const isOnLegal = Astro.url.pathname === "/legal";
 const description =
   "sacid celik, a software developer from munich, de. my favorite tools include javascript, angular, astro and nodejs";
 
-const image = `${Astro.url.origin}/portrait.webp`;
-
 const schema = {
   "@context": "http://schema.org",
   "@type": "Person",
@@ -25,7 +23,7 @@ const schema = {
     "https://www.linkedin.com/in/sacid-celik",
     "https://github.com/sacidcelik",
   ],
-  image: "https://sacidcelik.de/portrait.webp",
+  image: "https://www.sacidcelik.de/portrait.webp",
   jobTitle: "Freelance Software Developer",
   worksFor: {
     "@type": "Organization",
@@ -66,7 +64,10 @@ const schema = {
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url.origin} />
-    <meta property="og:image" content={image} />
+    <meta
+      property="og:image"
+      content="https://www.sacidcelik.de/portrait.webp"
+    />
     {isOnLegal && <meta name="robots" content="noindex, nofollow" />}
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     <title>{title}</title>
