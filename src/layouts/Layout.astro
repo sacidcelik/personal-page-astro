@@ -174,15 +174,34 @@ const serviceSchema = {
       <div class="flex gap-4 items-center">
         {
           isOnRoot && (
-            <a
-              href={lang === "de" ? "/" : "/de/"}
-              aria-label={
-                lang === "de" ? "switch to english" : "auf deutsch wechseln"
-              }
-              class="hover:text-orange-400 hover:dark:text-orange-700"
+            <nav
+              aria-label="language selection"
+              class="flex items-center gap-1.5 leading-none"
             >
-              {lang === "de" ? "en" : "de"}
-            </a>
+              <a
+                href="/"
+                aria-current={lang === "en" ? "page" : undefined}
+                class={
+                  lang === "en"
+                    ? "font-bold"
+                    : "hover:text-orange-400 hover:dark:text-orange-700"
+                }
+              >
+                en
+              </a>
+              <span aria-hidden="true" class="font-thin">/</span>
+              <a
+                href="/de/"
+                aria-current={lang === "de" ? "page" : undefined}
+                class={
+                  lang === "de"
+                    ? "font-bold"
+                    : "hover:text-orange-400 hover:dark:text-orange-700"
+                }
+              >
+                de
+              </a>
+            </nav>
           )
         }
         <ThemeToggle />
