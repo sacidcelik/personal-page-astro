@@ -8,7 +8,23 @@ import icon from 'astro-icon';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.sacidcelik.de',
-  integrations: [icon(), sitemap({ filter: (page) => !page.includes('/legal') })],
+  i18n: {
+    locales: ['en', 'de'],
+    defaultLocale: 'en',
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
+  integrations: [
+    icon(),
+    sitemap({
+      filter: (page) => !page.includes('/legal'),
+      i18n: {
+        defaultLocale: 'en',
+        locales: { en: 'en', de: 'de' },
+      },
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

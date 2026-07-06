@@ -2,22 +2,26 @@
 import "../styles/global.css";
 import ThemeToggle from "../components/ThemeToggle.astro";
 import { Icon } from "astro-icon/components";
+import { getLang, useTranslations, type Lang } from "../i18n/ui";
 
 interface Props {
   title: string;
   description?: string;
-  lang?: string;
+  lang?: Lang;
   noindex?: boolean;
 }
 
 const {
   title,
-  description = "sacid celik, a freelance software developer from munich, de. my favorite tools include angular, typescript, javascript, astro and nodejs",
-  lang = "en",
+  description,
+  lang = getLang(Astro.currentLocale),
   noindex = false,
 } = Astro.props;
 
-const isOnRoot = Astro.url.pathname === "/";
+const t = useTranslations(lang);
+const metaDescription = description ?? t("meta.description");
+
+const isOnRoot = ["/", "/de", "/de/"].includes(Astro.url.pathname);
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL("/og-image.png", Astro.site);
@@ -65,8 +69,7 @@ const serviceSchema = {
   name: "Sacid Celik — Freelance Software Development",
   url: "https://www.sacidcelik.de",
   image: "https://www.sacidcelik.de/portrait.webp",
-  description:
-    "Freelance software development with a focus on Angular and TypeScript: frontend architecture, modernization and migrations, and fullstack web development.",
+  description: t("meta.serviceDescription"),
   founder: {
     "@type": "Person",
     name: "Sacid Celik",
@@ -96,8 +99,25 @@ const serviceSchema = {
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonicalURL} />
+    {
+      isOnRoot && (
+        <>
+          <link rel="alternate" hreflang="en" href={new URL("/", Astro.site)} />
+          <link
+            rel="alternate"
+            hreflang="de"
+            href={new URL("/de/", Astro.site)}
+          />
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={new URL("/", Astro.site)}
+          />
+        </>
+      )
+    }
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -110,7 +130,7 @@ const serviceSchema = {
     <meta name="generator" content={Astro.generator} />
     <meta property="og:site_name" content="sacid celik" />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:locale" content={lang === "de" ? "de_DE" : "en_US"} />
@@ -123,7 +143,7 @@ const serviceSchema = {
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={ogImageURL} />
     <meta
       name="twitter:image:alt"
@@ -151,7 +171,22 @@ const serviceSchema = {
         <Icon name="line-md--arrow-left" class="text-2xl" />
         <span>Home</span>
       </a>
-      <ThemeToggle />
+      <div class="flex gap-4 items-center">
+        {
+          isOnRoot && (
+            <a
+              href={lang === "de" ? "/" : "/de/"}
+              aria-label={
+                lang === "de" ? "switch to english" : "auf deutsch wechseln"
+              }
+              class="hover:text-orange-400 hover:dark:text-orange-700"
+            >
+              {lang === "de" ? "en" : "de"}
+            </a>
+          )
+        }
+        <ThemeToggle />
+      </div>
     </header>
     <slot />
   </body>

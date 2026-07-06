@@ -1,6 +1,10 @@
 ---
 import Card from "./Card.astro";
 import Pill from "./Pill.astro";
+import { getLang, useTranslations, type Lang } from "../i18n/ui";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
 
 interface Project {
   title: string;
@@ -8,43 +12,79 @@ interface Project {
   stack: string[];
 }
 
-const projects: Project[] = [
-  {
-    title: "solar energy platform",
-    description:
-      "long-term development of a configuration & commissioning app for solar power systems — owning one of its largest cross-cutting feature modules as sole frontend developer",
-    stack: ["angular", "ngrx", "rxjs", "nx"],
-  },
-  {
-    title: "video & event platform",
-    description:
-      "white-label event platform — new features like in-app chat and architecture decisions across its micro-frontends",
-    stack: ["angular", "ngrx", "cypress"],
-  },
-  {
-    title: "ai search mvp",
-    description:
-      "cognitive search over heterogeneous data sources for an enterprise r&d team — frontend plus api backend, shipped in weeks",
-    stack: ["vue", "flask", "azure"],
-  },
-  {
-    title: "websites & shops for small businesses",
-    description:
-      "consulting, design and development for craft, logistics and retail businesses",
-    stack: ["kirby cms", "javascript", "php"],
-  },
-  {
-    title: "this website",
-    description:
-      "my personal corner of the web, statically generated and lightning fast",
-    stack: ["astro", "tailwind", "typescript"],
-  },
-];
+const projectsByLang: Record<Lang, Project[]> = {
+  en: [
+    {
+      title: "solar energy platform",
+      description:
+        "long-term development of a configuration & commissioning app for solar power systems — owning one of its largest cross-cutting feature modules as sole frontend developer",
+      stack: ["angular", "ngrx", "rxjs", "nx"],
+    },
+    {
+      title: "video & event platform",
+      description:
+        "white-label event platform — new features like in-app chat and architecture decisions across its micro-frontends",
+      stack: ["angular", "ngrx", "cypress"],
+    },
+    {
+      title: "ai search mvp",
+      description:
+        "cognitive search over heterogeneous data sources for an enterprise r&d team — frontend plus api backend, shipped in weeks",
+      stack: ["vue", "flask", "azure"],
+    },
+    {
+      title: "websites & shops for small businesses",
+      description:
+        "consulting, design and development for craft, logistics and retail businesses",
+      stack: ["kirby cms", "javascript", "php"],
+    },
+    {
+      title: "this website",
+      description:
+        "my personal corner of the web, statically generated and lightning fast",
+      stack: ["astro", "tailwind", "typescript"],
+    },
+  ],
+  de: [
+    {
+      title: "solarenergie-plattform",
+      description:
+        "langfristige entwicklung einer konfigurations- und inbetriebnahme-app für solaranlagen — verantwortlich für eines der größten feature-module als alleiniger frontend-entwickler",
+      stack: ["angular", "ngrx", "rxjs", "nx"],
+    },
+    {
+      title: "video- & eventplattform",
+      description:
+        "white-label-eventplattform — neue features wie in-app-chat und architektur-entscheidungen über die micro-frontends",
+      stack: ["angular", "ngrx", "cypress"],
+    },
+    {
+      title: "ki-such-mvp",
+      description:
+        "cognitive search über heterogene datenquellen für eine enterprise-r&d-abteilung — frontend plus api-backend, umgesetzt in wenigen wochen",
+      stack: ["vue", "flask", "azure"],
+    },
+    {
+      title: "websites & shops für kleine unternehmen",
+      description:
+        "beratung, gestaltung und entwicklung für handwerk, logistik und handel",
+      stack: ["kirby cms", "javascript", "php"],
+    },
+    {
+      title: "diese website",
+      description:
+        "meine persönliche ecke im web, statisch generiert und blitzschnell",
+      stack: ["astro", "tailwind", "typescript"],
+    },
+  ],
+};
+
+const projects = projectsByLang[lang];
 ---
 
 <Card colSpan="md:col-span-1" rowSpan="md:row-span-1" order="9">
   <div class="flex flex-col h-full">
-    <h2 class="text-lg font-thin">selected work</h2>
+    <h2 class="text-lg font-thin">{t("work.heading")}</h2>
     <div class="flex flex-col gap-3 mt-2">
       {
         projects.map((project) => (
@@ -60,6 +100,6 @@ const projects: Project[] = [
         ))
       }
     </div>
-    <p class="text-sm mt-4">references and further details on request.</p>
+    <p class="text-sm mt-4">{t("work.references")}</p>
   </div>
 </Card>

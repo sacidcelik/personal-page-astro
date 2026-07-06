@@ -1,5 +1,8 @@
 ---
 import Card from "./Card.astro";
+import { getLang, useTranslations } from "../i18n/ui";
+
+const t = useTranslations(getLang(Astro.currentLocale));
 ---
 
 <Card
@@ -8,5 +11,5 @@ import Card from "./Card.astro";
   order="7"
   href="/legal"
 >
-  <span class="text-sm">legal notice</span>
+  <span class="text-sm">{t("imprint.label")}</span>
 </Card>

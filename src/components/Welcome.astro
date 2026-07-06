@@ -2,6 +2,9 @@
 import Button from "./Button.astro";
 import Card from "./Card.astro";
 import { Icon } from "astro-icon/components";
+import { getLang, useTranslations } from "../i18n/ui";
+
+const t = useTranslations(getLang(Astro.currentLocale));
 
 const links = {
   linkedIn: "https://www.linkedin.com/in/sacid-celik",
@@ -17,11 +20,9 @@ const buttonCss =
   <div class="flex h-full">
     <div class="flex flex-col justify-between md:max-h-[300px] gap-4">
       <div class="flex flex-col h-full">
-        <h2 class="text-lg font-thin">welcome</h2>
+        <h2 class="text-lg font-thin">{t("welcome.heading")}</h2>
         <p class="text-lg">
-          hello and welcome! i’m <b>sacid celik</b>, a software developer with a
-          passion for crafting high-performance, delightful user experiences.
-          i’m excited to connect with you!
+          {t("welcome.text.intro")} <b>sacid celik</b>{t("welcome.text.rest")}
         </p>
       </div>
       <div class="flex gap-4">

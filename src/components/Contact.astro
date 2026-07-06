@@ -1,5 +1,8 @@
 ---
 import Card from "./Card.astro";
+import { getLang, useTranslations } from "../i18n/ui";
+
+const t = useTranslations(getLang(Astro.currentLocale));
 ---
 
 <Card
@@ -7,10 +10,9 @@ import Card from "./Card.astro";
   rowSpan="md:row-span-2 lg:row-span-3 lg:row-start-4 lg:col-start-3"
   order="3"
 >
-  <h2 class="text-lg font-thin">contact me</h2>
+  <h2 class="text-lg font-thin">{t("contact.heading")}</h2>
   <p class="text-lg">
-    let's collaborate! happy to receive your message at <em
-      >reach@sacidcelik.de</em
-    > or on the socials.
+    {t("contact.text.before")} <em>reach@sacidcelik.de</em>{" "}
+    {t("contact.text.after")}
   </p>
 </Card>
