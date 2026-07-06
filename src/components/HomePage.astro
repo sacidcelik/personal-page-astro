@@ -33,10 +33,10 @@ const t = useTranslations(getLang(Astro.currentLocale));
       class="text-orange-700 dark:text-orange-400">astro</a
     >{t("made.after")}
   </span>
-  <span class="opacity-70" aria-hidden="true"> · </span>
+  <span class="opacity-70 hidden md:inline" aria-hidden="true"> · </span>
   <a
     href="/legal"
-    class="opacity-70 underline underline-offset-2 hover:text-orange-400 hover:dark:text-orange-700"
+    class="block md:inline opacity-70 underline underline-offset-2 hover:text-orange-400 hover:dark:text-orange-700"
     >{t("imprint.label")}</a
   >
 </footer>
