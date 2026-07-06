@@ -40,9 +40,9 @@ const de = {
     ", software-entwickler mit einer leidenschaft für performante, durchdachte user experiences. schön, dass du hier bist!",
   "about.heading": "über mich",
   "about.p1":
-    "ich bin software-entwickler aus deutschland und liebe es, dinge zu bauen. meine karriere begann im marketing bei einem FAANG-konzern, aber meine neugier und freude am problemlösen führten mich in die spannende welt der webentwicklung.",
+    "ich bin software-entwickler aus deutschland und baue einfach gerne dinge. angefangen habe ich im marketing bei einem FAANG-konzern. meine neugier und der spaß am problemlösen haben mich dann in die webentwicklung gezogen.",
   "about.p2":
-    "ich lerne gerne neues dazu und wähle meine tools nach den anforderungen des kunden. meine üblichen werkzeuge (bisher) sind:",
+    "ich probiere gerne neues aus und wähle meine tools nach dem, was der kunde braucht. am häufigsten arbeite ich (bisher) mit:",
   "now.heading": "aktuell",
   "now.status": "unterwegs als freelance-entwickler",
   "now.location": "zuhause in münchen",
