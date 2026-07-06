@@ -42,9 +42,7 @@ const projects: Project[] = [
             <p class="text-sm">{project.description}</p>
             <div class="flex mt-2 gap-2 w-full flex-wrap">
               {project.stack.map((tech) => (
-                <Pill>
-                  <span class="text-sm">{tech}</span>
-                </Pill>
+                <Pill>{tech}</Pill>
               ))}
             </div>
           </div>
