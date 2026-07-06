@@ -31,7 +31,7 @@ const en = {
 const de = {
   "meta.title": "sacid celik | software-entwickler",
   "meta.description":
-    "sacid celik, freiberuflicher software-entwickler aus münchen. schwerpunkt angular & typescript, offen für freelance-projekte — remote oder hybrid",
+    "sacid celik, freiberuflicher software-entwickler aus münchen. schwerpunkt angular & typescript, offen für freelance-projekte, remote oder hybrid",
   "meta.serviceDescription":
     "Freiberufliche Softwareentwicklung mit Schwerpunkt Angular und TypeScript: Frontend-Architektur, Modernisierung und Migrationen sowie Fullstack-Webentwicklung.",
   "welcome.heading": "willkommen",
