@@ -1,14 +1,29 @@
 ---
 interface Props {
   label?: string;
+  href?: string;
 }
 
-const { label } = Astro.props;
+const { label, href } = Astro.props;
+
+const classes =
+  "group/button inline-block text-xl max-h-[50px] hover:scale-110 drop-shadow-lg border-t-2 border-l-2 border-r-4 border-b-4 active:filter-none active:translate-x-[3px] active:translate-y-[3px] px-5 py-2 active:border border-orange-300 dark:border-orange-700 hover:text-primary-500 cursor-pointer rounded-lg";
 ---
 
-<button
-  class="group/button text-xl max-h-[50px] hover:scale-110 drop-shadow-lg border-t-2 border-l-2 border-r-4 border-b-4 active:filter-none active:translate-x-[3px] active:translate-y-[3px] px-5 py-2 active:border border-orange-300 dark:border-orange-700 hover:text-primary-500 cursor-pointer rounded-lg"
-  aria-label={label ?? ""}
->
-  <slot />
-</button>
+{
+  href ? (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener"
+      class={classes}
+      aria-label={label ?? ""}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button class={classes} aria-label={label ?? ""}>
+      <slot />
+    </button>
+  )
+}

@@ -1,0 +1,55 @@
+---
+import Card from "./Card.astro";
+import Pill from "./Pill.astro";
+
+interface Project {
+  title: string;
+  description: string;
+  stack: string[];
+}
+
+// TODO: replace the first two entries with real projects/references
+const projects: Project[] = [
+  {
+    title: "enterprise angular platform",
+    description:
+      "long-term feature development and modernization for a large b2b application",
+    stack: ["angular", "typescript", "rxjs"],
+  },
+  {
+    title: "design system & component library",
+    description:
+      "reusable ui components and theming for consistent product interfaces",
+    stack: ["angular", "storybook", "sass"],
+  },
+  {
+    title: "this website",
+    description:
+      "my personal corner of the web, statically generated and lightning fast",
+    stack: ["astro", "tailwind", "typescript"],
+  },
+];
+---
+
+<Card colSpan="md:col-span-1" rowSpan="md:row-span-1" order="9">
+  <div class="flex flex-col h-full">
+    <h2 class="text-lg font-thin">selected work</h2>
+    <div class="flex flex-col gap-3 mt-2">
+      {
+        projects.map((project) => (
+          <div>
+            <h3 class="font-bold">{project.title}</h3>
+            <p class="text-sm">{project.description}</p>
+            <div class="flex mt-2 gap-2 w-full flex-wrap">
+              {project.stack.map((tech) => (
+                <Pill>
+                  <span class="text-sm">{tech}</span>
+                </Pill>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Card>
