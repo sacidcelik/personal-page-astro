@@ -8,19 +8,30 @@ interface Project {
   stack: string[];
 }
 
-// TODO: replace the first two entries with real projects/references
 const projects: Project[] = [
   {
-    title: "enterprise angular platform",
+    title: "solar energy platform",
     description:
-      "long-term feature development and modernization for a large b2b application",
-    stack: ["angular", "typescript", "rxjs"],
+      "long-term development of a configuration & commissioning app for solar power systems — owning one of its largest cross-cutting feature modules as sole frontend developer",
+    stack: ["angular", "ngrx", "rxjs", "nx"],
   },
   {
-    title: "design system & component library",
+    title: "video & event platform",
     description:
-      "reusable ui components and theming for consistent product interfaces",
-    stack: ["angular", "storybook", "sass"],
+      "white-label event platform — new features like in-app chat and architecture decisions across its micro-frontends",
+    stack: ["angular", "ngrx", "cypress"],
+  },
+  {
+    title: "ai search mvp",
+    description:
+      "cognitive search over heterogeneous data sources for an enterprise r&d team — frontend plus api backend, shipped in weeks",
+    stack: ["vue", "flask", "azure"],
+  },
+  {
+    title: "websites & shops for small businesses",
+    description:
+      "consulting, design and development for craft, logistics and retail businesses",
+    stack: ["kirby cms", "javascript", "php"],
   },
   {
     title: "this website",
@@ -40,7 +51,7 @@ const projects: Project[] = [
           <div>
             <h3 class="font-bold">{project.title}</h3>
             <p class="text-sm">{project.description}</p>
-            <div class="flex mt-2 gap-2 w-full flex-wrap">
+            <div class="flex mt-2 gap-1.5 w-full flex-wrap">
               {project.stack.map((tech) => (
                 <Pill>{tech}</Pill>
               ))}
@@ -49,5 +60,6 @@ const projects: Project[] = [
         ))
       }
     </div>
+    <p class="text-sm mt-4">references and further details on request.</p>
   </div>
 </Card>
