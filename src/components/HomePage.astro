@@ -11,8 +11,9 @@ import { getLang, useTranslations } from "../i18n/ui";
 const t = useTranslations(getLang(Astro.currentLocale));
 ---
 
+<!-- row 7 is pinned to the taller (de) about card so en/de total heights match and the centered body lands at the same y in both locales -->
 <main
-  class="mx-auto p-3 grid gap-2 max-w-screen-lg overflow-hidden relative w-full sm:p-4 md:grid-cols-2 md:gap-3 md:p-6 lg:grid-cols-4 lg:gap-4 lg:grid-rows-[repeat(6,80px)_auto_auto]"
+  class="mx-auto p-3 grid gap-2 max-w-screen-lg overflow-hidden relative w-full sm:p-4 md:grid-cols-2 md:gap-3 md:p-6 lg:grid-cols-4 lg:gap-4 lg:grid-rows-[repeat(6,80px)_minmax(360px,auto)_auto]"
 >
   <Welcome />
   <Avatar />
