@@ -5,33 +5,51 @@ import { Icon } from "astro-icon/components";
 
 interface Props {
   title: string;
+  description?: string;
+  lang?: string;
+  noindex?: boolean;
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description = "sacid celik, a freelance software developer from munich, de. my favorite tools include angular, typescript, javascript, astro and nodejs",
+  lang = "en",
+  noindex = false,
+} = Astro.props;
 
 const isOnRoot = Astro.url.pathname === "/";
-const isOnLegal = Astro.url.pathname === "/legal";
 
-const description =
-  "sacid celik, a software developer from munich, de. my favorite tools include javascript, angular, astro and nodejs";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL("/og-image.png", Astro.site);
 
-const schema = {
-  "@context": "http://schema.org",
+const personSchema = {
+  "@context": "https://schema.org",
   "@type": "Person",
   name: "Sacid Celik",
-  url: "https://sacidcelik.de",
+  url: "https://www.sacidcelik.de",
   sameAs: [
     "https://www.linkedin.com/in/sacid-celik",
     "https://github.com/sacidcelik",
   ],
   image: "https://www.sacidcelik.de/portrait.webp",
   jobTitle: "Freelance Software Developer",
+  email: "mailto:reach@sacidcelik.de",
+  knowsAbout: [
+    "Angular",
+    "TypeScript",
+    "JavaScript",
+    "React",
+    "Astro",
+    "Node.js",
+    "Sass",
+    "Docker",
+  ],
   worksFor: {
     "@type": "Organization",
     name: "Self-Employed",
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Germany",
+      addressLocality: "Munich",
       addressCountry: "DE",
     },
   },
@@ -40,10 +58,36 @@ const schema = {
     name: "Germany",
   },
 };
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Sacid Celik — Freelance Software Development",
+  url: "https://www.sacidcelik.de",
+  image: "https://www.sacidcelik.de/portrait.webp",
+  description:
+    "Freelance software development with a focus on Angular and TypeScript: frontend architecture, modernization and migrations, and fullstack web development.",
+  founder: {
+    "@type": "Person",
+    name: "Sacid Celik",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Munich",
+    addressCountry: "DE",
+  },
+  areaServed: ["Munich", "Germany", "Remote"],
+  serviceType: [
+    "Angular Development",
+    "Frontend Architecture",
+    "Web Development",
+    "Software Consulting",
+  ],
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <script>
       if (localStorage.theme === "dark") {
@@ -51,8 +95,10 @@ const schema = {
       }
     </script>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width" /><link
+    <link rel="canonical" href={canonicalURL} />
+    <link
       rel="apple-touch-icon"
       sizes="180x180"
       href="/apple-touch-icon.png"
@@ -60,17 +106,40 @@ const schema = {
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
+    <meta property="og:site_name" content="sacid celik" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url.origin} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content={lang === "de" ? "de_DE" : "en_US"} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta
-      property="og:image"
-      content="https://www.sacidcelik.de/portrait.webp"
+      property="og:image:alt"
+      content="sacid celik — freelance software developer"
     />
-    {isOnLegal && <meta name="robots" content="noindex, nofollow" />}
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+    <meta
+      name="twitter:image:alt"
+      content="sacid celik — freelance software developer"
+    />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)}
+    />
+    {
+      isOnRoot && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(serviceSchema)}
+        />
+      )
+    }
     <title>{title}</title>
   </head>
   <body
