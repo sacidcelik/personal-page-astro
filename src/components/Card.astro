@@ -32,13 +32,13 @@ const {
 } = Astro.props;
 
 const animationDelay: AnimationDelay = {
-  "1": "motion-safe:delay-1",
-  "2": "motion-safe:delay-2",
-  "3": "motion-safe:delay-3",
-  "4": "motion-safe:delay-4",
-  "5": "motion-safe:delay-5",
-  "6": "motion-safe:delay-6",
-  "7": "motion-safe:delay-7",
+  "1": "motion-safe:animate-delay-1",
+  "2": "motion-safe:animate-delay-2",
+  "3": "motion-safe:animate-delay-3",
+  "4": "motion-safe:animate-delay-4",
+  "5": "motion-safe:animate-delay-5",
+  "6": "motion-safe:animate-delay-6",
+  "7": "motion-safe:animate-delay-7",
 };
 
 const cssString = `card motion-safe:opacity-0 ${!noPadding && "border-t-2 border-l-2 border-r-4 border-b-4"} border-sky-900 ${bgColor} dark:border-sky-200  motion-safe:animate-appear motion-safe:fill-mode-forwards ${animationDelay[order as keyof AnimationDelay]} h-max sm:h-auto group/card overflow-hidden shadow-lg rounded-lg ${!noPadding && "p-5"} ${href && "hover:border-orange-400 hover:dark:border-orange-700"} align-start flex-none h-max justify-start relative ${maxHeight} w-full col-span-=1 ${colSpan || "md:col-span-2"} ${rowSpan || "row-span-2"} ${order === "7" && "mb-5 md:mb-0"}`;
