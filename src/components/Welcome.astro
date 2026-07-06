@@ -2,9 +2,12 @@
 import Button from "./Button.astro";
 import Card from "./Card.astro";
 import { Icon } from "astro-icon/components";
+import { getLang, useTranslations } from "../i18n/ui";
+
+const t = useTranslations(getLang(Astro.currentLocale));
 
 const links = {
-  linkedIn: "http://www.linkedin.com/in/sacid-celik",
+  linkedIn: "https://www.linkedin.com/in/sacid-celik",
   github: "https://github.com/sacidcelik",
   mail: "mailto:reach@sacidcelik.de",
 };
@@ -17,26 +20,18 @@ const buttonCss =
   <div class="flex h-full">
     <div class="flex flex-col justify-between md:max-h-[300px] gap-4">
       <div class="flex flex-col h-full">
-        <h2 class="text-lg font-thin">welcome</h2>
+        <h2 class="text-lg font-thin">{t("welcome.heading")}</h2>
         <p class="text-lg">
-          hello and welcome! i’m <b>sacid celik</b>, a software developer with a
-          passion for crafting high-performance, delightful user experiences.
-          i’m excited to connect with you!
+          {t("welcome.text.intro")} <b>sacid celik</b>{t("welcome.text.rest")}
         </p>
       </div>
       <div class="flex gap-4">
-        <a href={links.github} aria-label="github profile" target="_blank">
-          <Button label="open github profile">
-            <Icon class={buttonCss} name="line-md--github" />
-          </Button>
-          <span class="sr-only">GitHub Profile</span>
-        </a>
-        <a href={links.linkedIn} aria-label="linkedIn profile" target="_blank"
-          ><Button label="open linkedin profile">
-            <Icon class={buttonCss} name="line-md--linkedin" /></Button
-          >
-          <span class="sr-only">LinkedIn Profile</span></a
-        >
+        <Button href={links.github} label="open github profile">
+          <Icon class={buttonCss} name="line-md--github" />
+        </Button>
+        <Button href={links.linkedIn} label="open linkedin profile">
+          <Icon class={buttonCss} name="line-md--linkedin" />
+        </Button>
       </div>
     </div>
   </div>

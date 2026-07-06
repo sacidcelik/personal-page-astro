@@ -1,10 +1,14 @@
 ---
 import Card from "./Card.astro";
 import Pill from "./Pill.astro";
+import { getLang, useTranslations } from "../i18n/ui";
+
+const t = useTranslations(getLang(Astro.currentLocale));
 
 const skills = [
-  "JavaScript",
   "Angular",
+  "TypeScript",
+  "JavaScript",
   "React",
   "Astro",
   "Node",
@@ -19,18 +23,10 @@ const skills = [
   order="2"
 >
   <div class="flex flex-col h-full">
-    <h2 class="text-lg font-thin">about</h2>
-    <p>
-      i'm a software developer from germany and i love to build stuff. my career
-      began in marketing at a FAANG company but my natural curiosity and love
-      for problem-solving led me to dive into the exciting realm of web
-      development.
-    </p>
-    <p class="md:mt-4">
-      i am eager to branch out and lern new things and i choose my tools based
-      on the customer's needs. however, my usual tools (so far) include:
-    </p>
-    <div class="flex mt-6 gap-2 w-full flex-wrap">
+    <h2 class="text-lg font-thin">{t("about.heading")}</h2>
+    <p>{t("about.p1")}</p>
+    <p class="md:mt-4">{t("about.p2")}</p>
+    <div class="flex mt-4 gap-1.5 w-full flex-wrap">
       {skills.map((skill) => <Pill>{skill.toLowerCase()}</Pill>)}
     </div>
   </div>

@@ -1,36 +1,59 @@
 ---
+import "../styles/global.css";
 import ThemeToggle from "../components/ThemeToggle.astro";
 import { Icon } from "astro-icon/components";
+import { getLang, useTranslations, type Lang } from "../i18n/ui";
 
 interface Props {
   title: string;
+  description?: string;
+  lang?: Lang;
+  noindex?: boolean;
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description,
+  lang = getLang(Astro.currentLocale),
+  noindex = false,
+} = Astro.props;
 
-const isOnRoot = Astro.url.pathname === "/";
-const isOnLegal = Astro.url.pathname === "/legal";
+const t = useTranslations(lang);
+const metaDescription = description ?? t("meta.description");
 
-const description =
-  "sacid celik, a software developer from munich, de. my favorite tools include javascript, angular, astro and nodejs";
+const isOnRoot = ["/", "/de", "/de/"].includes(Astro.url.pathname);
 
-const schema = {
-  "@context": "http://schema.org",
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL("/og-image.png", Astro.site);
+
+const personSchema = {
+  "@context": "https://schema.org",
   "@type": "Person",
   name: "Sacid Celik",
-  url: "https://sacidcelik.de",
+  url: "https://www.sacidcelik.de",
   sameAs: [
     "https://www.linkedin.com/in/sacid-celik",
     "https://github.com/sacidcelik",
   ],
   image: "https://www.sacidcelik.de/portrait.webp",
   jobTitle: "Freelance Software Developer",
+  email: "mailto:reach@sacidcelik.de",
+  knowsAbout: [
+    "Angular",
+    "TypeScript",
+    "JavaScript",
+    "React",
+    "Astro",
+    "Node.js",
+    "Sass",
+    "Docker",
+  ],
   worksFor: {
     "@type": "Organization",
     name: "Self-Employed",
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Germany",
+      addressLocality: "Munich",
       addressCountry: "DE",
     },
   },
@@ -39,10 +62,35 @@ const schema = {
     name: "Germany",
   },
 };
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Sacid Celik — Freelance Software Development",
+  url: "https://www.sacidcelik.de",
+  image: "https://www.sacidcelik.de/portrait.webp",
+  description: t("meta.serviceDescription"),
+  founder: {
+    "@type": "Person",
+    name: "Sacid Celik",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Munich",
+    addressCountry: "DE",
+  },
+  areaServed: ["Munich", "Germany", "Remote"],
+  serviceType: [
+    "Angular Development",
+    "Frontend Architecture",
+    "Web Development",
+    "Software Consulting",
+  ],
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <script>
       if (localStorage.theme === "dark") {
@@ -50,8 +98,27 @@ const schema = {
       }
     </script>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width" /><link
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={metaDescription} />
+    <link rel="canonical" href={canonicalURL} />
+    {
+      isOnRoot && (
+        <>
+          <link rel="alternate" hreflang="en" href={new URL("/", Astro.site)} />
+          <link
+            rel="alternate"
+            hreflang="de"
+            href={new URL("/de/", Astro.site)}
+          />
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={new URL("/", Astro.site)}
+          />
+        </>
+      )
+    }
+    <link
       rel="apple-touch-icon"
       sizes="180x180"
       href="/apple-touch-icon.png"
@@ -59,21 +126,44 @@ const schema = {
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
+    <meta property="og:site_name" content="sacid celik" />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url.origin} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content={lang === "de" ? "de_DE" : "en_US"} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta
-      property="og:image"
-      content="https://www.sacidcelik.de/portrait.webp"
+      property="og:image:alt"
+      content="sacid celik — freelance software developer"
     />
-    {isOnLegal && <meta name="robots" content="noindex, nofollow" />}
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={ogImageURL} />
+    <meta
+      name="twitter:image:alt"
+      content="sacid celik — freelance software developer"
+    />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)}
+    />
+    {
+      isOnRoot && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(serviceSchema)}
+        />
+      )
+    }
     <title>{title}</title>
   </head>
   <body
-    class={`bg-slate-100 dark:bg-slate-900 text-sky-900 dark:text-sky-100 motion-safe:transition-colors motion-safe:duration-1000 m-auto max-w-screen-lg ${isOnRoot && "md:h-screen"} ${isOnRoot && "flex flex-col justify-center"} items-center`}
+    class={`bg-slate-100 dark:bg-slate-900 text-sky-900 dark:text-sky-100 motion-safe:transition-colors motion-safe:duration-1000 m-auto max-w-screen-lg ${isOnRoot && "md:min-h-screen"} ${isOnRoot && "flex flex-col justify-center"} items-center`}
   >
     <header class="w-full relative md:h-10 flex justify-between p-6">
       <div class={`${!isOnRoot && "hidden"}`}></div>
@@ -81,7 +171,41 @@ const schema = {
         <Icon name="line-md--arrow-left" class="text-2xl" />
         <span>Home</span>
       </a>
-      <ThemeToggle />
+      <div class="flex gap-4 items-center">
+        {
+          isOnRoot && (
+            <nav
+              aria-label="language selection"
+              class="flex items-center gap-1.5 leading-none"
+            >
+              <a
+                href="/"
+                aria-current={lang === "en" ? "page" : undefined}
+                class={
+                  lang === "en"
+                    ? "font-bold"
+                    : "hover:text-orange-400 hover:dark:text-orange-700"
+                }
+              >
+                en
+              </a>
+              <span aria-hidden="true" class="font-thin">/</span>
+              <a
+                href="/de/"
+                aria-current={lang === "de" ? "page" : undefined}
+                class={
+                  lang === "de"
+                    ? "font-bold"
+                    : "hover:text-orange-400 hover:dark:text-orange-700"
+                }
+              >
+                de
+              </a>
+            </nav>
+          )
+        }
+        <ThemeToggle />
+      </div>
     </header>
     <slot />
   </body>

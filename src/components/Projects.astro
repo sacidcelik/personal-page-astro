@@ -1,0 +1,105 @@
+---
+import Card from "./Card.astro";
+import Pill from "./Pill.astro";
+import { getLang, useTranslations, type Lang } from "../i18n/ui";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+
+interface Project {
+  title: string;
+  description: string;
+  stack: string[];
+}
+
+const projectsByLang: Record<Lang, Project[]> = {
+  en: [
+    {
+      title: "solar energy platform",
+      description:
+        "long-term development of an app for configuring and commissioning solar power systems. i own one of its largest feature modules as the sole frontend developer.",
+      stack: ["angular", "ngrx", "rxjs", "nx"],
+    },
+    {
+      title: "video & event platform",
+      description:
+        "new features for a white-label event platform, like an in-app chat, plus architecture decisions across its micro-frontends.",
+      stack: ["angular", "ngrx", "cypress"],
+    },
+    {
+      title: "ai search mvp",
+      description:
+        "a cognitive search mvp for an enterprise r&d team. i built the frontend and the api backend in a few weeks.",
+      stack: ["vue", "flask", "azure"],
+    },
+    {
+      title: "websites & shops for small businesses",
+      description:
+        "consulting, design and development for craft, logistics and retail businesses",
+      stack: ["kirby cms", "javascript", "php"],
+    },
+    {
+      title: "this website",
+      description:
+        "my personal corner of the web, statically generated and lightning fast",
+      stack: ["astro", "tailwind", "typescript"],
+    },
+  ],
+  de: [
+    {
+      title: "solarenergie-plattform",
+      description:
+        "langfristige entwicklung einer app zur konfiguration und inbetriebnahme von solaranlagen. eines der größten feature-module verantworte ich als alleiniger frontend-entwickler.",
+      stack: ["angular", "ngrx", "rxjs", "nx"],
+    },
+    {
+      title: "video- & eventplattform",
+      description:
+        "neue features für eine white-label-eventplattform, unter anderem ein in-app-chat, dazu architektur-entscheidungen über die micro-frontends.",
+      stack: ["angular", "ngrx", "cypress"],
+    },
+    {
+      title: "ki-such-mvp",
+      description:
+        "ein cognitive-search-mvp für die r&d-abteilung eines konzerns. frontend und api-backend habe ich in wenigen wochen umgesetzt.",
+      stack: ["vue", "flask", "azure"],
+    },
+    {
+      title: "websites & shops für kleine unternehmen",
+      description:
+        "beratung, gestaltung und entwicklung für handwerk, logistik und handel",
+      stack: ["kirby cms", "javascript", "php"],
+    },
+    {
+      title: "diese website",
+      description:
+        "meine persönliche ecke im web, statisch generiert und blitzschnell",
+      stack: ["astro", "tailwind", "typescript"],
+    },
+  ],
+};
+
+const projects = projectsByLang[lang];
+---
+
+<Card colSpan="md:col-span-1" rowSpan="md:row-span-1" order="9">
+  <div class="flex flex-col h-full">
+    <h2 class="text-lg font-thin">{t("work.heading")}</h2>
+    <div class="flex flex-col gap-3 mt-2">
+      {
+        projects.map((project) => (
+          <div>
+            <h3 class="font-bold">{project.title}</h3>
+            <p class="text-sm">{project.description}</p>
+            <div class="flex mt-2 gap-1.5 w-full flex-wrap">
+              {project.stack.map((tech) => (
+                <Pill>{tech}</Pill>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <p class="text-sm mt-4">{t("work.references")}</p>
+  </div>
+</Card>
