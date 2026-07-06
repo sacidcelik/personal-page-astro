@@ -82,7 +82,11 @@ const projectsByLang: Record<Lang, Project[]> = {
 const projects = projectsByLang[lang];
 ---
 
-<Card colSpan="md:col-span-1" rowSpan="md:row-span-1" order="9">
+<Card
+  colSpan="md:col-span-1 lg:col-span-2 lg:col-start-3"
+  rowSpan="md:row-span-1 lg:row-start-9"
+  order="9"
+>
   <div class="flex flex-col h-full">
     <h2 class="text-lg font-thin">{t("work.heading")}</h2>
     <div class="flex flex-col gap-3 mt-2">
