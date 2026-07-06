@@ -150,6 +150,11 @@ const serviceSchema = {
       content="sacid celik — freelance software developer"
     />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {
+      import.meta.env.PROD && (
+        <script is:inline defer src="/_vercel/insights/script.js" />
+      )
+    }
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)}
     />
     {
