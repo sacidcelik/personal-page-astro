@@ -3,15 +3,16 @@ import Welcome from "./Welcome.astro";
 import About from "./About.astro";
 import Contact from "./Contact.astro";
 import Now from "./Now.astro";
-import Imprint from "./Imprint.astro";
-import Made from "./Made.astro";
 import Avatar from "./Avatar.astro";
 import Services from "./Services.astro";
 import Projects from "./Projects.astro";
+import { getLang, useTranslations } from "../i18n/ui";
+
+const t = useTranslations(getLang(Astro.currentLocale));
 ---
 
 <main
-  class="mx-auto p-3 max-md:pb-8 grid gap-2 max-w-screen-lg overflow-hidden relative w-full sm:p-4 md:grid-cols-2 md:gap-3 md:p-6 lg:grid-cols-4 lg:gap-4 lg:grid-rows-[repeat(8,80px)_auto]"
+  class="mx-auto p-3 grid gap-2 max-w-screen-lg overflow-hidden relative w-full sm:p-4 md:grid-cols-2 md:gap-3 md:p-6 lg:grid-cols-4 lg:gap-4 lg:grid-rows-[repeat(6,80px)_auto_auto]"
 >
   <Welcome />
   <Avatar />
@@ -20,6 +21,21 @@ import Projects from "./Projects.astro";
   <Contact />
   <Services />
   <Projects />
-  <Imprint />
-  <Made />
 </main>
+<footer
+  class="w-full px-3 pb-6 text-sm text-center md:text-left sm:px-4 md:px-6 motion-safe:opacity-0 motion-safe:animate-appear motion-safe:animate-delay-7 motion-safe:fill-mode-forwards"
+>
+  <span class="opacity-70"
+    >{new Date().getFullYear()}. {t("made.before")} <a
+      href="https://astro.build"
+      target="_blank"
+      class="text-orange-700 dark:text-orange-400">astro</a
+    >{t("made.after")}
+  </span>
+  <span class="opacity-70" aria-hidden="true"> · </span>
+  <a
+    href="/legal"
+    class="opacity-70 underline underline-offset-2 hover:text-orange-400 hover:dark:text-orange-700"
+    >{t("imprint.label")}</a
+  >
+</footer>
