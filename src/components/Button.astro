@@ -6,6 +6,8 @@ interface Props {
 
 const { label, href } = Astro.props;
 
+const opensNewTab = href !== undefined && !href.startsWith("mailto:");
+
 const classes =
   "group/button inline-block text-xl max-h-[50px] hover:scale-110 drop-shadow-lg border-t-2 border-l-2 border-r-4 border-b-4 active:filter-none active:translate-x-[3px] active:translate-y-[3px] px-5 py-2 active:border border-orange-300 dark:border-orange-700 hover:text-primary-500 cursor-pointer rounded-lg";
 ---
@@ -14,8 +16,8 @@ const classes =
   href ? (
     <a
       href={href}
-      target="_blank"
-      rel="noopener"
+      target={opensNewTab ? "_blank" : undefined}
+      rel={opensNewTab ? "noopener" : undefined}
       class={classes}
       aria-label={label ?? ""}
     >
