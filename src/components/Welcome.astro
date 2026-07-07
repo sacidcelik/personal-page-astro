@@ -24,10 +24,9 @@ const buttonCss =
   <div class="flex h-full">
     <div class="flex flex-col justify-between md:max-h-[300px] gap-4">
       <div class="flex flex-col h-full">
-        <h2 class="text-lg font-thin">{t("welcome.heading")}</h2>
-        <p class="text-lg">
-          {t("welcome.text.intro")} <b>sacid celik</b>{t("welcome.text.rest")}
-        </p>
+        <p class="text-lg font-thin">{t("welcome.heading")}</p>
+        <h1 class="text-lg font-bold">{t("welcome.h1")}</h1>
+        <p class="text-lg">{t("welcome.text")}</p>
       </div>
       <div class="flex gap-4">
         <Button href={links.github} label="open github profile">
@@ -35,6 +34,9 @@ const buttonCss =
         </Button>
         <Button href={links.linkedIn} label="open linkedin profile">
           <Icon class={buttonCss} name="line-md--linkedin" />
+        </Button>
+        <Button href={links.mail} label="send email">
+          <Icon class={buttonCss} name="line-md--email" />
         </Button>
       </div>
     </div>

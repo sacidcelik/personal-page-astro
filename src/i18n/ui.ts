@@ -4,10 +4,11 @@ const en = {
     "sacid celik, a freelance software developer from munich, de. my favorite tools include angular, typescript, javascript, astro and nodejs",
   "meta.serviceDescription":
     "Freelance software development with a focus on Angular and TypeScript: frontend architecture, modernization and migrations, and fullstack web development.",
+  "meta.ogImageAlt": "sacid celik — freelance software developer",
   "welcome.heading": "welcome",
-  "welcome.text.intro": "hello and welcome! i’m",
-  "welcome.text.rest":
-    ", a software developer with a passion for crafting high-performance, delightful user experiences. i’m excited to connect with you!",
+  "welcome.h1": "sacid celik — software engineer",
+  "welcome.text":
+    "hello and welcome! i’m a software developer with a passion for crafting high-performance, delightful user experiences. i’m excited to connect with you!",
   "about.heading": "about",
   "about.p1":
     "i'm a software developer from germany and i love to build stuff. my career began in marketing at a FAANG company but my natural curiosity and love for problem-solving led me to dive into the exciting realm of web development.",
@@ -26,6 +27,10 @@ const en = {
   "services.heading": "services",
   "work.heading": "selected work",
   "work.references": "references and further details on request.",
+  "notFound.title": "page not found | sacid celik",
+  "notFound.heading": "page not found",
+  "notFound.text": "this page doesn’t exist.",
+  "notFound.link": "back to home",
 } as const;
 
 const de = {
@@ -34,10 +39,11 @@ const de = {
     "sacid celik, freiberuflicher software-entwickler aus münchen. schwerpunkt angular & typescript, offen für freelance-projekte, remote oder hybrid",
   "meta.serviceDescription":
     "Freiberufliche Softwareentwicklung mit Schwerpunkt Angular und TypeScript: Frontend-Architektur, Modernisierung und Migrationen sowie Fullstack-Webentwicklung.",
+  "meta.ogImageAlt": "sacid celik — freiberuflicher software-entwickler",
   "welcome.heading": "willkommen",
-  "welcome.text.intro": "hallo und willkommen! ich bin",
-  "welcome.text.rest":
-    ", software-entwickler mit einer leidenschaft für performante, durchdachte user experiences. schön, dass du hier bist!",
+  "welcome.h1": "sacid celik — software-entwickler",
+  "welcome.text":
+    "hallo und willkommen! ich bin software-entwickler mit einer leidenschaft für performante, durchdachte user experiences. schön, dass du hier bist!",
   "about.heading": "über mich",
   "about.p1":
     "als software-entwickler aus münchen baue ich einfach gerne dinge. angefangen habe ich im marketing bei einem FAANG-konzern. meine neugier und der spaß am problemlösen haben mich dann zur webentwicklung gebracht.",
@@ -56,6 +62,10 @@ const de = {
   "services.heading": "leistungen",
   "work.heading": "ausgewählte projekte",
   "work.references": "referenzen und weitere details auf anfrage.",
+  "notFound.title": "seite nicht gefunden | sacid celik",
+  "notFound.heading": "seite nicht gefunden",
+  "notFound.text": "diese seite gibt es nicht.",
+  "notFound.link": "zur startseite",
 } as const satisfies Record<keyof typeof en, string>;
 
 export const ui = { en, de };

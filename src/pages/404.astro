@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import { useTranslations } from "../i18n/ui";
+
+const en = useTranslations("en");
+const de = useTranslations("de");
+
+const linkCss =
+  "underline underline-offset-2 hover:text-orange-400 hover:dark:text-orange-700";
+---
+
+<Layout title={en("notFound.title")} noindex>
+  <main class="mx-auto p-3 max-w-screen-lg w-full sm:p-4 md:p-6">
+    <Card order="1" colSpan="md:col-span-2" rowSpan="row-span-1">
+      <h1 class="text-lg font-bold">404 — {en("notFound.heading")}</h1>
+      <p class="text-lg">
+        {en("notFound.text")} <a href="/" class={linkCss}>{en("notFound.link")}</a>
+      </p>
+      <p class="text-lg" lang="de">
+        {de("notFound.text")}{" "}
+        <a href="/de/" class={linkCss}>{de("notFound.link")}</a>
+      </p>
+    </Card>
+  </main>
+</Layout>

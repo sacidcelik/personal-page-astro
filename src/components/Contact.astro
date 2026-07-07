@@ -12,7 +12,12 @@ const t = useTranslations(getLang(Astro.currentLocale));
 >
   <h2 class="text-lg font-thin">{t("contact.heading")}</h2>
   <p class="text-lg">
-    {t("contact.text.before")} <em>reach@sacidcelik.de</em>{" "}
+    {t("contact.text.before")}{" "}
+    <a
+      href="mailto:reach@sacidcelik.de"
+      class="underline underline-offset-2 hover:text-orange-400 hover:dark:text-orange-700"
+      >reach@sacidcelik.de</a
+    >{" "}
     {t("contact.text.after")}
   </p>
 </Card>
